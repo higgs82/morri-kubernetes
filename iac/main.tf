@@ -11,14 +11,14 @@ variable "ssh_key" {
   sensitive = true
 }
 
-resource "proxmox_vm_qemu" "k8s-1" {
+resource "proxmox_vm_qemu" "AJH-1" {
   count = 3
-  name = "k8s-1${count.index + 1}"
+  name = "AJH-1${count.index + 1}"
   target_node = var.proxmox_node
   clone = var.cloudinit_template_name
   agent = 1
   os_type = "cloud-init"
-  cores = 4
+  cores = 1
   sockets = 1
   cpu = "host"
   memory = 4096
@@ -27,7 +27,7 @@ resource "proxmox_vm_qemu" "k8s-1" {
 
   disk {
     slot = 0
-    size = "40G"
+    size = "10G"
     type = "scsi"
     storage = "pve1"
   }
